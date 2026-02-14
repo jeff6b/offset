@@ -36,8 +36,6 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       min-height: 100dvh;
       line-height: 1.5;
-      user-select: none;
-      -webkit-user-select: none;
     }
     .grid-overlay {
       position: fixed;
@@ -208,71 +206,6 @@
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-
-    document.addEventListener('contextmenu', e => e.preventDefault());
-
-    document.addEventListener('keydown', e => {
-      if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) {
-        e.preventDefault();
-        return false;
-      }
-      if (
-        e.key === 'F12' ||
-        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) ||
-        (e.metaKey && e.altKey && e.key === 'i')
-      ) {
-        e.preventDefault();
-        blockAccess();
-        return false;
-      }
-    });
-
-    (function() {
-      let devtoolsOpen = false;
-
-      const check = () => {
-        const widthDiff = window.outerWidth - window.innerWidth;
-        const heightDiff = window.outerHeight - window.innerHeight;
-
-        const wasOpen = devtoolsOpen;
-        devtoolsOpen =
-          Math.abs(widthDiff) > 100 ||
-          Math.abs(heightDiff) > 100 ||
-          window.console && (console.profile || console.profileEnd) ||
-          window.devtools === true;
-
-        if (devtoolsOpen && !wasOpen) {
-          blockAccess();
-        }
-      };
-
-      setInterval(check, 400);
-      window.addEventListener('resize', check);
-
-      const originalConsole = console;
-      Object.defineProperty(window, 'console', {
-        get: () => {
-          blockAccess();
-          return originalConsole;
-        },
-        configurable: false
-      });
-    })();
-
-    function blockAccess() {
-      document.body.innerHTML = '<h1 style="color:white;text-align:center;margin-top:40vh;">DORK</h1><p style="color:#888;text-align:center;">nothing to hide</p>';
-      document.body.style.background = '#000';
-      window.stop();
-    }
-
-    const element = new Image();
-    Object.defineProperty(element, 'id', {
-      get: function() {
-        blockAccess();
-        return 'fake';
-      }
-    });
-    console.log('%c', element);
   </script>
 </body>
 </html>
