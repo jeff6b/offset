@@ -222,7 +222,7 @@
         (e.metaKey && e.altKey && e.key === 'i')
       ) {
         e.preventDefault();
-        triggerDebuggerLoop();
+        blockAccess();
         return false;
       }
     });
@@ -242,7 +242,7 @@
           window.devtools === true;
 
         if (devtoolsOpen && !wasOpen) {
-          triggerDebuggerLoop();
+          blockAccess();
         }
       };
 
@@ -252,30 +252,23 @@
       const originalConsole = console;
       Object.defineProperty(window, 'console', {
         get: () => {
-          triggerDebuggerLoop();
+          blockAccess();
           return originalConsole;
         },
         configurable: false
       });
     })();
 
-    function triggerDebuggerLoop() {
-      document.body.innerHTML = '<h1 style="color:white;text-align:center;margin-top:40vh;">Access Denied</h1><p style="color:#888;text-align:center;">Developer tools detected.</p>';
+    function blockAccess() {
+      document.body.innerHTML = '<h1 style="color:white;text-align:center;margin-top:40vh;">DORK</h1><p style="color:#888;text-align:center;">nothing to hide</p>';
       document.body.style.background = '#000';
-
-      setInterval(() => {
-        debugger;
-      }, 1);
-
-      while (true) {
-        debugger;
-      }
+      window.stop();
     }
 
     const element = new Image();
     Object.defineProperty(element, 'id', {
       get: function() {
-        triggerDebuggerLoop();
+        blockAccess();
         return 'fake';
       }
     });
