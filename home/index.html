@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Celestial</title>
+  <style>
+    :root {
+      --bg: #0a0a0c;
+      --text: #e5e5ea;
+      --text-dim: #a0a0a8;
+      --grid: rgba(180, 180, 200, 0.035);
+      --outline: #1a1a1e;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: var(--bg);
+      background-image:
+        linear-gradient(to right,
+          rgba(255,255,255,0.065) 0px,
+          rgba(255,255,255,0.055) 40px,
+          rgba(255,255,255,0.038) 100px,
+          rgba(255,255,255,0.022) 180px,
+          rgba(255,255,255,0.010) 280px,
+          transparent 420px
+        );
+      background-position: left center;
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      background-attachment: fixed;
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      min-height: 100dvh;
+      line-height: 1.5;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .grid-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(to right, var(--grid) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+      background-size: 28px 28px;
+      z-index: -1;
+      opacity: 0.65;
+      mix-blend-mode: screen;
+    }
+    .navbar {
+      position: fixed;
+      top: 1.8rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: transparent;
+      padding: 0.4rem 9rem 0.4rem 1.2rem;
+      min-width: 780px;
+      max-width: 92vw;
+      border: 1.5px solid var(--outline);
+      border-radius: 16px;
+      pointer-events: none;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.25);
+    }
+    .nav-tabs {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      font-size: 1.05rem;
+      font-weight: 500;
+      pointer-events: auto;
+      margin-left: 1.5rem;
+    }
+    .nav-tabs a {
+      color: white;
+      text-decoration: none;
+      transition: opacity 0.2s;
+      cursor: pointer;
+    }
+    .nav-tabs a:hover {
+      opacity: 0.75;
+    }
+    .navbar-logo {
+      height: 64px;
+      width: auto;
+      margin-left: 0;
+    }
+    .main-content {
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+    }
+    h1 {
+      font-size: clamp(3.4rem, 8.5vw, 5.4rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 0.92;
+      margin-bottom: 0.8rem;
+      color: white;
+    }
+    .tagline {
+      font-size: clamp(1.05rem, 3.2vw, 1.45rem);
+      color: var(--text-dim);
+      font-weight: 400;
+      max-width: 580px;
+      margin: 1.2rem auto 5rem;
+      line-height: 1.45;
+    }
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.4rem;
+      justify-content: center;
+      margin-top: -2rem;
+    }
+    .btn {
+      padding: 0.85rem 2.4rem;
+      font-size: 1.02rem;
+      font-weight: 600;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.22s ease;
+      display: inline-flex;
+      align-items: center;
+    }
+    .btn-primary {
+      background: #ffffff;
+      color: #000000;
+      border: none;
+    }
+    .btn-primary:hover {
+      background: #f0f0f0;
+      transform: translateY(-2px);
+    }
+    .btn-secondary {
+      background: transparent;
+      color: white;
+      border: 1.5px solid var(--outline);
+    }
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.05);
+      border-color: #3a3a3e;
+      transform: translateY(-2px);
+    }
+    @media (max-width: 1100px) {
+      .navbar {
+        padding: 0.35rem 6rem 0.35rem 1rem;
+        min-width: 85vw;
+      }
+      .navbar-logo {
+        height: 56px;
+      }
+    }
+    @media (max-width: 640px) {
+      .navbar {
+        padding: 0.45rem 3rem 0.45rem 0.8rem;
+        min-width: 92vw;
+      }
+      .navbar-logo {
+        height: 48px;
+      }
+      .nav-tabs {
+        gap: 1.8rem;
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="grid-overlay"></div>
+
+  <div class="navbar">
+    <img
+      src="https://image2url.com/r2/default/images/1770423268822-32a09791-acb6-41e0-b8f9-1b159be9dc14.blob"
+      alt="Celestial Logo"
+      class="navbar-logo"
+    >
+    <div class="nav-tabs">
+      <a href="#top" onclick="scrollToTop(); return false;">Home</a>
+      <a href="#">FAQ</a>
+      <a href="#" onclick="alert('Pricing coming soon!'); return false;">Pricing</a>
+    </div>
+  </div>
+
+  <div class="main-content" id="top">
+    <h1>Celestial</h1>
+    <p class="tagline">
+      Get Good. Get Celestial.
+    </p>
+    <div class="buttons">
+      <button class="btn btn-primary">Continue</button>
+      <button class="btn btn-secondary">About</button>
+    </div>
+  </div>
+
+  <script>
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.addEventListener('contextmenu', e => e.preventDefault());
+
+    document.addEventListener('keydown', e => {
+      if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) {
+        e.preventDefault();
+        return false;
+      }
+      if (
+        e.key === 'F12' ||
+        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) ||
+        (e.metaKey && e.altKey && e.key === 'i')
+      ) {
+        e.preventDefault();
+        triggerDebuggerLoop();
+        return false;
+      }
+    });
+
+    (function() {
+      let devtoolsOpen = false;
+
+      const check = () => {
+        const widthDiff = window.outerWidth - window.innerWidth;
+        const heightDiff = window.outerHeight - window.innerHeight;
+
+        const wasOpen = devtoolsOpen;
+        devtoolsOpen =
+          Math.abs(widthDiff) > 100 ||
+          Math.abs(heightDiff) > 100 ||
+          window.console && (console.profile || console.profileEnd) ||
+          window.devtools === true;
+
+        if (devtoolsOpen && !wasOpen) {
+          triggerDebuggerLoop();
+        }
+      };
+
+      setInterval(check, 400);
+      window.addEventListener('resize', check);
+
+      const originalConsole = console;
+      Object.defineProperty(window, 'console', {
+        get: () => {
+          triggerDebuggerLoop();
+          return originalConsole;
+        },
+        configurable: false
+      });
+    })();
+
+    function triggerDebuggerLoop() {
+      document.body.innerHTML = '<h1 style="color:white;text-align:center;margin-top:40vh;">Access Denied</h1><p style="color:#888;text-align:center;">Developer tools detected.</p>';
+      document.body.style.background = '#000';
+
+      setInterval(() => {
+        debugger;
+      }, 1);
+
+      while (true) {
+        debugger;
+      }
+    }
+
+    const element = new Image();
+    Object.defineProperty(element, 'id', {
+      get: function() {
+        triggerDebuggerLoop();
+        return 'fake';
+      }
+    });
+    console.log('%c', element);
+  </script>
+</body>
+</html>
